@@ -8,9 +8,8 @@ x = 0
 for i in data_reader:
     if len(i[0]) > 3:
         continue
-    if x == 0:
-        i[0] = "101"
-        x+=1
+
+        
     if i[0] not in UHF_to_measurements.keys():
         UHF_to_measurements[i[0]] = [(i[1:])]
         

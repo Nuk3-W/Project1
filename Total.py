@@ -1,14 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Fri Oct 18 15:03:15 2024
-
-@author: suwaidi
-"""
-
 import csv
 def uhf_file_load():
-    file = open("/Users/suwaidi/Desktop/G44P1/uhf.csv", "r")
+    file = open("uhf.csv", "r")
     data_reader = csv.reader(file)
     zipcode_to_UHF = {}
     Borough_to_UHF = {}
@@ -29,7 +21,7 @@ def uhf_file_load():
     return Borough_to_UHF, zipcode_to_UHF
 
 def air_quality_load():
-    file = open("/Users/suwaidi/Desktop/G44P1/air_quality.csv", 'r')
+    file = open("air_quality.csv", 'r')
     data_reader = csv.reader(file)
     UHF_to_measurements ={}
     date_to_measurements = {}

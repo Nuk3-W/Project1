@@ -6,7 +6,7 @@ d) Come up with at least two other questions to ask about the dataset and
 write code to answer them.
 """
 
-import Total
+import project1
 
 Borough_to_UHF, zipcode_to_UHF = Total.uhf_file_load()
 UHF_to_measurements, date_to_measurements = Total.air_quality_load()

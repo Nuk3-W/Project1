@@ -8,8 +8,8 @@ write code to answer them.
 
 import project1
 
-Borough_to_UHF, zipcode_to_UHF = Total.uhf_file_load()
-UHF_to_measurements, date_to_measurements = Total.air_quality_load()
+Borough_to_UHF, zipcode_to_UHF = project1.uhf_file_load()
+UHF_to_measurements, date_to_measurements = project1.air_quality_load()
 
 
 high = -1
@@ -58,7 +58,7 @@ for i in Borough_to_UHF["Manhattan"]:
             sum_of_pollution += float(j[-1])
             iterables += 1
             
-print(sum_of_pollution, iterables)
+#print(sum_of_pollution, iterables)
 
 print("The aveage between 2008 and 2019 in Manhattan is", sum_of_pollution/iterables)
 

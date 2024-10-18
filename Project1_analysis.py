@@ -54,7 +54,7 @@ for i in Borough_to_UHF["Manhattan"]:
             x = j[2]
         else:
             x = j[1]
-        if (int(x[-2:-1] + x[-1]) >= 8) and (int(x[-2:-1] + x[-1]) <= 19):
+        if (int(x[-2:]) >= 8) and (int(x[-2:]) <= 19):
             sum_of_polluion += float(j[-1])
             iterables += 1
 

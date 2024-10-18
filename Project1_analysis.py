@@ -72,7 +72,7 @@ for i in Borough_to_UHF.keys():
                 x = k[2]
             else:
                 x = k[1]
-            if (int(x[-2:-1]) >= 8) and (int(x[-2:-1]) <= 9):
+            if (int(x[-2:]) >= 8) and (int(x[-2:]) <= 19):
                 sum_of_polluion += float(k[-1])
                 iterables += 1
     borough_average.append((i,sum_of_polluion/iterables))

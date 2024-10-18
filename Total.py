@@ -35,7 +35,7 @@ def air_quality_load():
     date_to_measurements = {}
     x = 0
     for i in data_reader:
-        if x == 0:
+        if x == 1:
             x+=1
             continue #This is to ensure that the "weird" 101 UHF is not included
         
@@ -48,11 +48,12 @@ def air_quality_load():
     
     
         if i[2] not in date_to_measurements.keys():
-            date_to_measurements[i[2]] = [(i[0:])]
+            date_to_measurements[i[2]] = [(i[:])]
         else:
-            if UHF_to_measurements[i[0]][-1][1] != i[2]:
-                UHF_to_measurements[i[0]].append((i[1:]))
-                date_to_measurements[i[2]].append((i[0:]))
+            if i not in date_to_measurements[i[2]]:
+                date_to_measurements[i[2]].append((i[:]))
+            # else:
+            #     print(i)
             
     file.close()
     return UHF_to_measurements, date_to_measurements

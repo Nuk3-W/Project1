@@ -1,3 +1,11 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Fri Nov 22 08:56:55 2024
+
+@author: suwaidi
+"""
+
 import random
 import csv
 import math
@@ -50,6 +58,9 @@ recovery_time = 4 # recovery time in time-steps
 virality = 1    # probability that a neighbor cell is infected in 
                   # each time step                                                  
 
+mean = 3 #This is for the pdeath function
+stdev = 1 #//
+
 class Cell(object):
 
     def __init__(self,x, y):
@@ -65,12 +76,27 @@ class Cell(object):
 
 
     def process(self, adjacent_cells): # Step 2.3
-        if self.time < 1 or not self.state == "I" :
+        if self.time < 1 or not self.state == "I" : #Do we need the not function here?
             self.time += 1
             return
-        for i in adjacent_cells:
-            if i.state == "S" and random.random() <= virality:
-                i.infect()
+        if self.state == "S":
+            for i in adjacent_cells:
+                if i.state == "I":
+                    print("h") #This never gets run so the disease isn't spreading.
+                if i.state == "I" and random.random() <= virality: #What does the i.state == "S" do? don't we need to make sure that the others are infected?
+                    self.infect()
+        elif self.state == "I":
+            if random.random() >= pdeath(self.time, mean, stdev): #I am not sure if it less than or greater than
+                self.state = "R"
+            
+    
+    def recovery(self):
+        if self.time == recovery_time and self.state == "I":
+            self.time = 0
+            self.state = "S"
+        
+        
+        
                     
         
 class Map(object):
@@ -112,8 +138,8 @@ class Map(object):
         if (x-1, y) in self.cells.keys(): 
             adjacentCells.append(self.cells[(x-1, y)])
         
-        return adjacentCells
-            
+        
+        return adjacentCells     
             
 
 def read_map(filename):
@@ -128,7 +154,11 @@ def read_map(filename):
 
 
 
-"""if __name__ == "__main__":
-    image = read_map("nyc_map.csv")
+if __name__ == "__main__":
+    image = read_map("/Users/suwaidi/Downloads/nyc_map.csv")
     image.display()
-"""
+    for i in range(100):
+        image.cells[ (39, 82)].infect()
+        image.time_step()
+        image.display()
+

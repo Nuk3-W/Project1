@@ -48,9 +48,9 @@ def pdeath(x, mean, sd):
     return integral    
     
 recovery_time = 4 # recovery time in time-steps
-virality = 0.2    # probability that a neighbor cell is infected in 
+virality = 0.2  # probability that a neighbor cell is infected in 
                   # each time step        
-mean = 3
+mean = 4
 stdev = 1                                          
 
 class Cell(object):
@@ -72,8 +72,9 @@ class Cell(object):
             if self.time == recovery_time:
                 self.state = "S"
                 self.time == 0
-            elif random.random() < pdeath(self.time, mean, stdev): #The disease isn't spreading, they die instantly
-                self.state = "R"           
+            elif random.random() <= pdeath(self.time, mean, stdev): #The disease isn't spreading, they die instantly
+                self.state = "R"    
+                self.time = 0
             else:
                 for i in adjacent_cells:
                     if i.state == "S" and random.random() <= virality:
@@ -117,7 +118,7 @@ class Map(object):
         plt.clf()
         plt.imshow(image)
         plt.axis('off')
-        plt.pause(0.001)
+        plt.pause(0.0001)
             
     
     def adjacent_cells(self, x,y): # Step 2.2
@@ -142,7 +143,7 @@ def read_map(filename):
     with open(filename, "r") as f:
         data_reader = csv.reader(f)
         for i in data_reader:
-            m.add_cell(Cell(i[0], i[1])) #len(image.cells.keys() = 7378 why?
+            m.add_cell(Cell(i[0], i[1]))
     
     return m
 
